@@ -1,0 +1,133 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="ClinicalTrials.ClinicalTrials.controller.Feedback" xmlns:uxap="sap.uxap" xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+    <uxap:ObjectPageLayout showTitleInHeaderContent="true" showHeaderContent="true" showAnchorBar="true" showFooter="true" subSectionLayout="TitleOnTop">
+        <uxap:headerContent>
+            <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                <items>
+                    <HBox alignItems="Center" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                        <items>
+                            <Label text="{i18n>appSubTitle}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                        </items>
+                        <layoutData />
+                    </HBox>
+                </items>
+                <layoutData />
+            </VBox>
+        </uxap:headerContent>
+        <uxap:headerTitle>
+            <uxap:ObjectPageHeader objectImageURI="{imageModel>/path}/images/pfizer.png" objectTitle="{i18n>appTitle}" objectSubtitle="" headerDesign="Dark" objectImageShape="Square" isObjectIconAlwaysVisible="false" isObjectTitleAlwaysVisible="false" isObjectSubtitleAlwaysVisible="false" isActionAreaAlwaysVisible="true">
+                <uxap:actions></uxap:actions>
+                <uxap:breadCrumbsLinks />
+                <uxap:navigationBar />
+            </uxap:ObjectPageHeader>
+        </uxap:headerTitle>
+        <uxap:sections>
+            <uxap:ObjectPageSection showTitle="true" title="Page Section Title" titleUppercase="true" visible="true">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection title="Search" mode="Expanded">
+                        <uxap:blocks>
+                            <form:Form width="100%" editable="true" visible="true">
+                                <form:formContainers>
+                                    <form:FormContainer visible="true">
+                                        <form:formElements>
+                                            <form:FormElement visible="true">
+                                                <form:label>
+                                                    <Label text="Condition" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                </form:label>
+                                                <SearchField id="selectConditionAS" placeholder="Search condition..." enableSuggestions="true"
+												suggestionItems="{
+													path: '/',
+													sorter: { path: '' }
+												}">
+												<suggestionItems>
+													<SuggestionItem text="{}"/>
+												</suggestionItems>
+                                                </SearchField>
+                                            </form:FormElement>
+                                            <form:FormElement visible="true">
+                                                <form:label>
+                                                    <Label text="Location" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                </form:label>
+												 <SearchField id="selectLocationAS" placeholder="Search country, city, state, zip code" enableSuggestions="true"
+												suggestionItems="{
+													path: '/suggestions',
+													sorter: { path: 'label' }
+												}">
+												<suggestionItems>
+													<SuggestionItem text="{label}"/>
+												</suggestionItems>
+                                                </SearchField>
+                                            </form:FormElement>
+											<form:FormElement visible="true">
+                                                <form:label>
+                                                    <Label text="Sponsor (Lead)" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                </form:label>
+                                                <form:fields>
+                                                    <Select id="selectSponsorAS" width="auto" change="onSelectSponsorChange" autoAdjustWidth="true" items="{/}" selectedKey="0">
+                                                        <core:Item key="{code}" text="{sponsor}" />
+                                                    </Select>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement visible="true">
+                                                <form:label>
+                                                    <Label text="Gender" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                </form:label>
+                                                <form:fields>
+                                                    <RadioButtonGroup id="selectGenderAS" columns="8" selectedIndex="0" valueState="None" width="auto" editable="true" enabled="true" textDirection="Inherit" select="_onRadioButtonGroupSelect">
+                                                        <buttons>
+                                                            <RadioButton text="All" editable="true" enabled="true" visible="true" width="auto" valueState="All" selected="false" />
+                                                            <RadioButton text="M" editable="true" enabled="true" visible="true" width="auto" valueState="Male" selected="false" />
+                                                            <RadioButton text="F" editable="true" enabled="true" visible="true" width="auto" valueState="Female" selected="false" />
+                                                        </buttons>
+                                                    </RadioButtonGroup>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement visible="true">
+                                                <form:label>
+                                                    <Label text="Age" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                </form:label>
+                                                <form:fields>
+                                                    <RadioButtonGroup id="selectAgeAS" columns="8" selectedIndex="0" valueState="None" width="auto" editable="true" enabled="true" textDirection="Inherit" select="_onRadioButtonGroupSelect">
+                                                        <buttons>
+                                                            <RadioButton text="All" editable="true" enabled="true" visible="true" width="auto" valueState="" selected="false" />
+                                                            <RadioButton text="Child" editable="true" enabled="true" visible="true" width="auto" valueState="0" selected="false" />
+                                                            <RadioButton text="Adult" editable="true" enabled="true" visible="true" width="auto" valueState="1" selected="false" />
+                                                            <RadioButton text="Older" editable="true" enabled="true" visible="true" width="auto" valueState="2" selected="false" />
+                                                        </buttons>
+                                                    </RadioButtonGroup>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement visible="true">
+                                                <form:label>
+                                                    <Label text="Trial Status" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                </form:label>
+                                                <form:fields>
+                                                    <Select id="selectTrialStatusAS" width="auto" change="onSelectTrialStatusChange" autoAdjustWidth="true" items="{/}" selectedKey="0">
+                                                        <core:Item key="{code}" text="{trialstatus}" />
+                                                    </Select>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="1" labelSpanL="4" columnsM="1" labelSpanM="2" labelSpanS="12" />
+                                </form:layout>
+                            </form:Form>
+                        </uxap:blocks>
+                        <uxap:moreBlocks />
+                        <uxap:actions />
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+                <uxap:customAnchorBarButton />
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+        <uxap:footer>
+            <OverflowToolbar width="100%" height="auto" design="Auto" enabled="true" visible="true">
+                <content>
+                    <ToolbarSpacer width="" />
+                    <Button text="Search" tooltip="Search" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onButtonPress" />
+                </content>
+            </OverflowToolbar>
+        </uxap:footer>
+    </uxap:ObjectPageLayout>
+</mvc:View>
